@@ -1,8 +1,30 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="30"
-             x:Class="FCommonUILib.FCommonUILib.Desktop.CustomTitleBar.Views.CustomTitleBar">
-	
+             x:Class="FCommonUILib.FCommonUILib.Desktop.CustomTitleBar.Views.CustomTitleBar"
+			 xmlns:viewModels="using:FCommonUILib.FCommonUILib.Desktop.CustomTitleBar.ViewModels">
+
+	<UserControl.DataContext>
+		<viewModels:CustomTitleBarViewModel/>
+	</UserControl.DataContext>
+
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<!-- Text zone -->
+			<ColumnDefinition Width="*"/>
+			
+			<!-- Buttons zone -->
+			<ColumnDefinition Width="Auto"/>
+		</Grid.ColumnDefinitions>
+
+		<TextBlock Text="{Binding CustomText}" VerticalAlignment="Center" Margin="10" Foreground="White" Grid.Column="0"/>
+
+		<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1">
+			<Button Content="🗕" Width="30" Height="30" Command="{Binding MinimizeCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
+			<Button Content="🗗" Width="30" Height="30" Command="{Binding MaximizeRestoreCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
+			<Button Content="❌" Width="30" Height="30" Command="{Binding CloseCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
+		</StackPanel>
+	</Grid>
+
+
+
 </UserControl>
